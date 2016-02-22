@@ -1,0 +1,92 @@
+#{extends "css.html"/}
+<!-- Plupload -->
+	<link rel="stylesheet" href="/public/css/plugins/plupload/jquery.plupload.queue.css">
+<!-- PLUpload -->
+	<script src="/public/js/plugins/plupload/plupload.full.js"></script>
+	<script src="/public/js/plugins/plupload/jquery.plupload.queue.js"></script>
+<div class="container-fluid" id="content">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box box-bordered">
+				<div class="box-title">
+					<h3>
+						<i class="icon-th-list"></i> &{'scene.form'}
+					</h3>
+				</div>
+<div class="box-content nopadding">
+#{form @@create(), class:"form-horizontal form-bordered"}
+#{form.textfield object:'object',name:'name',inputName:'scene',value:object.name/}
+#{form.textfield object:'object',name:'number',inputName:'scene',value:object.number/}
+#{form.textfield object:'object',name:'state',inputName:'scene',value:object.state/}
+<div class="row-fluid">
+						<div class="span12">
+							<div class="box">
+								<div class="box-title">
+									<h3><i class="icon-th"></i> Shot upload</h3>
+								</div>
+								<div class="box-content nopadding">
+									<div class="plupload"></div>
+								</div>
+							</div>
+						</div>
+</div>
+
+<input type="hidden" name="object.user.id" value="${session.userid}"/>
+<input type="hidden" name="object.project.id" value="${id}"/>
+<div style="display:none;" class="version">
+
+</div>
+<div class="form-actions">
+<button id="savebutton" type="sumbit" class="btn btn-primary">&{'option.save'}</button>
+<button type="button" class="btn back">&{'option.back'}</button>
+</div>
+#{/form}
+</div>
+</div>
+</div>
+<script>
+$(function(){
+		// PlUpload
+	$(".plupload").length > 0 && $(".plupload").each(function () {
+		var e = $(this);
+		e.pluploadQueue({runtimes:"html5,gears,flash,silverlight,browserplus", url:"/Scenes/plupload", multiple_queues:true, max_file_size:"10000mb", chunk_size:"1mb", unique_names:!0, resize:{width:320, height:240, quality:90}, filters:[{title:"Mov files", extensions:"mov,mp4"}], flash_swf_url:"/public/js/plupload/plupload.flash.swf", silverlight_xap_url:"/public/js/plupload/plupload.silverlight.xap"});
+		$(".plupload_header").remove();
+		var t = e.pluploadQueue();
+		if (e.hasClass("pl-sidebar")) {
+			$(".plupload_filelist_header,.plupload_progress_bar,.plupload_start").remove();
+			$(".plupload_droptext").html("<span>\u62d6\u52a8\u6587\u4ef6\u4e0a\u4f20</span>");
+			$(".plupload_progress").remove();
+			$(".plupload_add").text("Or click here...");
+			t.bind("FilesAdded", function (e, t) {
+				setTimeout(function () {
+					e.start();
+				}, 500);
+			});
+			t.bind("QueueChanged", function (e) {
+				$(".plupload_droptext").html("<span>Drop files to upload</span>");
+			});
+			t.bind("StateChanged", function (e) {
+				$(".plupload_upload_status").remove();
+				$(".plupload_buttons").show();
+			});
+		} else {
+			$(".plupload_progress_container").addClass("progress").addClass("progress-striped");
+			$(".plupload_progress_bar").addClass("bar");
+			$(".plupload_button").each(function () {
+				$(this).hasClass("plupload_add") ? $(this).attr("class", "btn pl_add btn-primary").html("<i class='icon-plus-sign'></i> " + $(this).html()) : $(this).attr("class", "btn pl_start btn-success").html("<i class='icon-cloud-upload'></i> " + $(this).html());
+			});
+		}
+		//上传成功后的处理
+		t.bind("FileUploaded",function(up,file,obj){
+			var html='<input type="hidden" name="version.id" value=""/>';
+			html+='<input type="hidden" name="version.number" value="'+file.name+'"/>';
+			html+='<input type="hidden" name="version.user.id" value="${session.userid}"/>';
+			html+='<input type="hidden" name="version.state" value="1"/>';
+			html+='<input type="hidden" name="version.path" value="'+obj.response+'"/>';
+			$('.version').append(html);
+		//	alert(file.id+"-------"+file.loaded+"-------"+file.name+"-------"+file.percent+"-------"+file.size+"-------"+file.status);
+		//	alert(obj.response);
+		})
+	});
+})
+</script>

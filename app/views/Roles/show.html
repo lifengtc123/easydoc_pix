@@ -1,0 +1,120 @@
+#{extends 'css.html' /}
+<div class="container-fluid" id="content">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box box-bordered">
+				<div class="box-title">
+					<h3>
+						<i class="icon-th-list"></i> &{'role.form'}
+					</h3>
+				</div>
+				<div class="box-content nopadding">
+				#{form @@save(object.id),class:'form-horizontal form-bordered',onsubmit:"return submit_form();"}
+				#{form.textfield object:'object',name:'name',inputName:'role',value:object.name/}
+				#{form.textfield object:'object',name:'sort',inputName:'role',value:object.sort/}
+				<div class="row-fluid">
+					<div class="span12">
+					<div class="box">
+					<div class="box-title">
+								<h3>
+									<i class="icon-table"></i>
+									拥有菜单
+								</h3>
+						<input type="checkbox" id="check1" name="chbox" class="menu" />
+						<span for="check1" style="margin-top: 4px">
+							全选
+						</span>
+					</div>
+						<table class="table table-hover table-nomargin table-bordered ">
+							#{list menu_p,as:'p'}
+							<tr>
+								<td
+									style="border: 1px solid #E7E7E7; width: 30%; vertical-align: middle;">
+									<div class="formRight">
+										<input type="checkbox" id="${p.cid}" cid="${p.cid}" name="menus" value="${p.id}" class="p_menu"${((","+object.menu+",").indexOf(","+p.id+",")>-1)?" checked=checked":""} />
+										<span for="check1">
+											${p.name}
+										</span>
+
+									</div>
+								</td>
+								<td style="border: 1px solid #E7E7E7;">
+									#{list menu_c,as:'c'} #{if c.pid == p.cid}
+									<div class="formRight" style="width: 100%;">
+										<input type="checkbox" id="${c.cid}" name="menus" cid="${c.cid}" pid="${c.pid}" value="${c.id}" class="c_menu"${((","+object.menu+",").indexOf(","+c.id+",")>-1)?" checked=checked":""} />
+										<span for="check1">
+											${c.name}
+										</span>
+										#{list role_c,as:'r'} #{if c.id == r.menu.id}
+										<input class="r_menu" cid="${r.menu.cid}" pid="${r.menu.pid}" type="checkbox" #{if role.hasVal(rolevalue,r.controller,r.value)}checked="checked" #{/if}  name="cons" value="${r.value}" controller="${r.controller}" />
+										${r.name} #{/if} #{/list}
+									</div>
+									#{/if} #{/list}
+								</td>
+							</tr>
+							#{/list}
+						</table>
+				<div class="form-actions">
+					<input type="hidden" id="value" name="value" value=""/>
+										<button id="savebutton" type="sumbit" class="btn btn-primary">&{'option.save'}</button>
+										<button type="button" class="btn back">&{'option.back'}</button>
+				</div>
+				#{/form}
+				</div>
+				</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function submit_form(){
+	//先组合菜单
+	var map = new HashMap();
+	var value="";
+	$("input[name=cons]").each(function(){
+		if(this.checked){
+			var controller = $(this).attr("controller");
+			var purview = map.get(controller);
+			if(purview==null) purview = 0;
+			purview = purview + Math.pow(2,$(this).val());
+			map.put(controller,purview);
+		}
+		
+	});
+	var keys = map.keys();
+	$.each(map.keys(),function(index,v){
+		if(value.length>0) value = value + "|";
+		value = value + v + ":" + map.get(v);
+	});
+	$("#value").val(value);
+	return true;
+}
+$(function(){
+$(".menu").click(function(){
+	checked = this.checked;
+	if(checked==null)checked=false;
+	$(this).parent().next().find("input").each(function(){
+		this.checked=checked;
+	});
+});
+
+$(".p_menu").click(function(){
+	checked =this.checked;
+	if(checked==null)checked=false;
+	$(this).parent().parent().parent().find("input").each(function(){
+		this.checked=checked;
+	});
+});
+$(".c_menu").click(function(){
+	pid = $(this).attr("pid");
+	cid = $(this).attr("cid");
+	checked =this.checked;
+	if(checked==null)checked=false;
+	$(this).parent().find("input").each(function(){
+		this.checked=checked;
+	});
+});
+});
+</script>

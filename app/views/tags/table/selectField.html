@@ -1,0 +1,23 @@
+#{field _object + '.' + _name}
+<div class="control-group">
+	#{if _label}
+	<label class="control-label">
+		&{_inputName + "." + _name}
+	</label>
+	#{/if}
+	<div class="controls">
+	<select id="${field.id}" name="${field.name}" class="input-large" >
+	%{ _input.each { }%
+	%{
+		selected = false
+		if(_value?.toString()==it?.key.toString()) selected = true;
+	}%
+	<option value="${it.key}"${selected ? ' selected="true"'.raw() : ''}>${it.value}</option>
+	%{ } }%
+	</select>
+	#{ifError field.name}
+		<span class="error">${field.error}</span>
+	#{/ifError}
+	</div>
+	</div>
+#{/field}

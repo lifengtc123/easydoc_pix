@@ -1,0 +1,36 @@
+#{extends "css.html"/}
+<div class="container-fluid" id="content">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="box box-bordered">
+							<div class="box-title">
+								<h3><i class="icon-th-list"></i> &{'roleControl.form'}</h3>
+							</div>
+							<div class="box-content nopadding">
+#{form @@create(),class:'form-horizontal form-bordered'}
+#{field 'object.menu.id'}
+<div class="control-group">
+<label for="${field.id}" class="control-label">&{'roleControl.menu'}</label>
+<div class="controls">
+<select name="${field.name}" id="${field.id}" class="input-large">
+<option value="0">-请选择-</option>
+#{list trees,as:'row'}
+<option value="${row.id}" >${row.selectTree.raw()}</option>
+#{/list}
+</select>
+</div>
+</div>
+#{/field}
+#{form.textfield object:'object',name:'name',inputName:'roleControl',value:object.name/}
+#{form.textfield object:'object',name:'controller',inputName:'roleControl',value:object.controller/}
+#{form.textfield object:'object',name:'action',inputName:'roleControl',value:object.action/}
+#{form.textfield object:'object',name:'value',inputName:'roleControl',value:object.value/}
+<div class="form-actions">
+<button id="savebutton" type="sumbit" class="btn btn-primary">&{'option.save'}</button>
+<button type="button" class="btn back">&{'option.back'}</button>
+</div>
+#{/form}
+</div>
+</div>
+</div> 	
+</div>

@@ -1,0 +1,36 @@
+.dataTables_info {
+float: left;
+margin-left: 10px;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+.dataTables_info span {
+font-weight: 600;
+}
+.dataTables_paginate {
+float: right;
+margin-right: 5px;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+.dataTables_paginate>a {
+margin-right: 5px;
+background: #eee;
+padding: 3px 8px;
+color: #333;
+text-decoration: none;
+cursor: pointer;
+}
+.dataTables_paginate>span>a {
+padding: 3px 8px;
+margin-right: 5px;
+background: #eee;
+color: #333;
+text-decoration: none;
+cursor: pointer;
+}
+.dataTables_paginate>span>a.paginate_active {
+background: #368ee0;
+color: #fff;
+}

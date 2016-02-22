@@ -1,0 +1,135 @@
+#{extends "css.html"/}
+<link rel="stylesheet" href="/public/css/comment.css" type="text/css"></link>
+<script type="text/javascript" src="/public/js/ac_quicktime.js"></script>
+<div class="span8">
+<object id="paris_obj" codebase="http://www.apple.com/qtactivex/qtplugin.cab#version=7,3,0,0" classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" class="quicktime">
+    <param value="${object.path}" name="src">
+    <embed src="${object.path}" id="paris_embed" name="movie2" type="video/quicktime" AUTOPLAY="True" SCALE="Aspect" style="width: 90%;margin: 20px;" height=816 LOOP="true"></embed>
+</object>
+<!-- 
+ <a href="javascript:document.movie2.Play();">播放</a><br>
+ <a href="javascript:document.movie2.Stop();">暂停</a><br>
+ <a href="javascript:document.movie2.Step(1);">向前一帧</a><br>
+ <a href="javascript:document.movie2.Step(-1);">向后一帧</a><br>
+ <a href="javascript:document.movie2.ShowDefaultView();">片段信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetQuickTimeVersion();alert(ss);">版本信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetQuickTimeLanguage();alert(ss);">语言信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetQuickTimeConnectionSpeed();alert(ss);">速度信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetIsQuickTimeRegistered();alert(ss);">注册信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetIsQuickTimeRegistered();alert(ss);">注册信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetPluginVersion();alert(ss);">插件版本信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetPluginStatus();alert(ss);">播放信息信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetAutoPlay(true);">自动播放（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetControllerVisible(true);">控制器显示（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetControllerVisible(false);">控制器隐藏（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetTime(1);">帧数控制 （第一帧）</a><br>
+ <a href="javascript:var ss=document.movie2.GetTime();alert(ss);">当前帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetEndTime();alert(ss);">最终帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetRate();alert(ss);">播放速率（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetDuration();alert(ss);">片段长度（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetMaxTimeLoaded();alert(ss);">影片已下载量（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetTimeScale();alert(ss);">影片fps速率（测试成功）</a><br>
+ -->
+ <!-- 
+ <a href="javascript:var ss=document.movie2.GetMovieName();alert(ss);">当前帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.SetMovieName('11111');alert(ss);">当前帧数（测试成功）</a><br>
+
+ <a href="javascript:var ss=document.movie2.GetMovieID();alert(ss);">当前帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetMovieID();alert(ss);">当前帧数（测试成功）</a><br>
+  -->
+<!-- 
+float GetRate()
+ 
+void SetRate(float rate)设置电影播放速率 1正常 负数是倒退
+
+int GetVolume()
+ 
+void SetVolume(int volume)音量控制
+ -->
+<!-- 
+”Waiting”—waiting for the movie data stream to begin
+”Loading”—data stream has begun, not able to play/display the movie yet
+”Playable”—movie is playable, although not all data has been downloaded
+”Complete”—all data has been downloaded
+”Error: <error number>”—the movie failed with the specified error number
+ -->
+</div>
+<div class="row-fluid">
+					<div class="span4">
+						<div class="box" style=" border: 1px solid#ddd;padding: 10px;margin: 20px 0;">
+							<div class="box-title">
+								<h3>
+									<i class="icon-comments"></i>
+									&{'comments.title'}
+								</h3>
+								<div class="actions">
+									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
+									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
+								</div>
+							</div>
+							<div class="box-content nopadding">
+								<ul class="messages">
+									#{list object.comments,as:'row'}
+									<li #{if row.user.truename==session.username}class=right#{/if}#{else}class="left"#{/else}>
+										<div class="image">
+											${row.user?.truename}
+										</div>
+										<div class="message">
+											<span class="caret"></span>
+											<p>${row.note}</p>
+											<span class="time">
+												${row.created?.format('MM-dd HH:mm')}
+											</span>
+										</div>
+									</li>
+									#{/list}
+									<li class="typing">
+										<span class="name">${session.username}</span> 正在输入<img src="/public/img/loading.gif" alt="">
+									</li>
+									<li class="insert">
+										<form id="comment-form" method="POST" action="#">
+											<div class="text">
+												<input type="hidden" name="comment.user.id" value="${session.userid}">
+												<input type="hidden" name="comment.version.id"  value="${object.id}">
+												<input type="text" name="comment.note" placeholder="Write here..." class="input-block-level">
+											</div>
+											<div class="submit">
+												<button type="submit"><i class="icon-share-alt"></i></button>
+											</div>
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+<script>
+$("#paris_embed").attr("height",$("#paris_embed").width()*0.7);
+$(window).resize(function() {
+ $("#paris_embed").attr("height",$("#paris_embed").width()*0.7);
+});
+	 $("#comment-form").submit(function (e) {
+		e.preventDefault();
+		var $el = $(this);
+		var mess = $el.find("input[type=text]").val(),
+		messageUl = $el.parents(".messages");
+		if ($el.find("button").attr("disabled") == undefined) {
+			$.ajax({
+				url:'/Comments/addUp',
+				type:'post',
+				data:$("#comment-form").serializeArray(),
+				success:function(){
+					var newEl = messageUl.find('.right').first().clone(),
+					answer = messageUl.find('.left').first().clone();
+					newEl.find(".message p").html(mess);
+					newEl.find(".message .time").html("现在");
+					messageUl.find(".typing").before(newEl);
+			//		slimScrollUpdate(messageUl.parents(".scrollable"), 100000);
+					$el.find("button").attr('disabled', 'disabled');
+			//		messageUl.find(".typing").removeClass("active");
+					$el.find("button").removeAttr("disabled");
+				}
+			});
+		}
+	});
+</script>

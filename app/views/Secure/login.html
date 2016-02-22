@@ -1,0 +1,56 @@
+#{extends 'login.html'/}
+<style>
+.footer {
+width: 1000px;
+position: relative;
+top: 20px;
+left: -28px;
+}
+.footer p {
+padding: 10px 0;
+margin-bottom: 0;
+color: #ccc;
+}
+</style>
+	<div class="wrapper">
+		<h1><a href="/">Phenom Client Review System</a></h1>
+		<div class="login-body">
+			<h2>&{'secour.login'}</h2>
+			<form action="/secure/authenticate" method='post' class='form-validate' id="test">
+				<div class="control-group">
+					<div class="email controls">
+						<input type="text" name='username' placeholder="&{'secour.username'}" class='input-block-level' data-rule-required="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="pw controls">
+						<input type="password" name="password" placeholder="&{'secour.password'}" class='input-block-level' data-rule-required="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="pw controls">
+				<select name="laug" id="laug">
+				<option value="zh" #{if lang=='zh'}selected="selected"#{/if}>&{'laug.chinese'}</option>
+				<option value="en" #{if lang=='en'}selected="selected"#{/if}>&{'laug.english'}</option>
+				</select>
+					</div>
+				</div>
+				<div class="submit">
+					<div class="remember">
+						<input type="checkbox" name="remember" class='icheck-me' data-skin="square" data-color="blue" id="remember"> <label for="remember">&{'secour.remember'}</label>
+					</div>
+					<input type="submit" value="&{'secour.login'}" class='btn btn-primary'>
+				</div>
+			</form>
+			<div class="forget" style="background: white;height: 50px;margin:0">
+			</div>
+		</div>
+		<div class="footer">
+			<p>
+				Copyright © 2013 Phenom Films Technology Co., Ltd. All Rights Reserved.  
+			</p>
+
+		</div>
+	</div>
+
+

@@ -1,0 +1,53 @@
+#{extends "css.html"/}
+<div class="row-fluid">
+					<div class="span12">
+						<div class="box">
+							<div class="box-title">
+								<h3>
+									<i class="icon-table"></i>
+									&{'project.title'}
+								</h3>
+							</div>
+<div class="box-content nopadding">
+<form action="@@{delete()}" method="post" onsubmit="return chk_arrayid();" id="listform">
+<table class="table table-hover table-nomargin table-bordered ">
+<thead>
+<tr>
+<th><input type="checkbox" id="chkall"/></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','user').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'project.user'}</a></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','name').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'project.name'}</a></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','state').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'project.state'}</a></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','number').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'project.number'}</a></th>
+<th>&{'option'}</th>
+</tr></thead>
+<tbody>
+#{list pagedList.list,as:'row'}
+<tr id="tr_${row.id}">
+<td><input type="checkbox" name="arrayid" value="${row.id}"/></td>
+<td>${row.project.user}&nbsp;</td>
+<td><a href="javascript:void(0);" onclick="location.href='@{Scenes.list(row.project.id)}'">${row.project.name}</a></td>
+<td>${row.project.state}&nbsp;</td>
+<td>${row.project.number}&nbsp;</td>
+<td>
+<a href="javascript:void(0);" onclick="location.href='@{Scenes.list(row.project.id)}'">&{'option.comeIn'}</a>
+<a href="javascript:void(0);" onclick="open_dialog('@@{show(row.project.id)}',600,400)">&{'option.edit'}</a>
+<a href="javascript:void(0);" class="option_delete" url="@@{delete(row.project.id)}">&{'option.delete'}</a>
+<a href="@@{addOfficials(row.project.id)}">&{'option.addStaff'}</a>
+</td>
+</tr>
+#{/list}
+</tbody>
+</table>
+<div class="dataTables_info" id="DataTables_Table_1_info">
+<button type="button" class="btn btn-primary btn-small add" url="@@{blank2()}">&{'option.add'}</button>
+</div>
+#{pagesize pagedList,addbutton:'hidden' /}
+</form>
+</div>
+</div>
+</div>
+</div>

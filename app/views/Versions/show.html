@@ -1,0 +1,226 @@
+
+#{extends "css.html"/}
+<script type="text/javascript" src="/public/js/sketch.js"></script>
+<link rel="stylesheet" href="/public/css/comment.css" type="text/css"></link>
+<script type="text/javascript" src="/public/js/ac_quicktime.js"></script>
+<div class="row-fluid">
+<div class="span8">
+<video id="video" controls="" preload="none" poster="${object.image}"  loop="loop" width=100% style="margin: 20px 0;">
+      <source id="mp4" src="${object.path}" type="video/mp4">
+    </video>
+<div>
+<span>&{'pix.timeLabel'}：${object.duration/1000}&{'pix.time'}</span>
+<br>
+<span>&{'pix.loadLabel'}：<a href="${object.path}">&{'pix.load'}</a></span>
+<br>
+<span>&{'pix.fpsLabel'}：<a href="${object.path}">${object.frameRate}</a></span>
+</div>
+<div id="buttons">
+      <button class="btn btn-primary" onclick="document.getElementById('video').load()"><i class="icon-stop"></i></button>
+      <button  class="btn btn-primary" onclick="document.getElementById('video').play()"><i class="icon-play"></i></button>
+      <button class="btn btn-primary"  onclick="document.getElementById('video').pause()"><i class="icon-pause"></i></button>
+      <button  class="btn btn-primary " onclick="document.getElementById('video').currentTime-=(1/${object.frameRate})"><i class="icon-backward"></i></button>
+      <button  class="btn btn-primary" onclick="document.getElementById('video').currentTime+=(1/${object.frameRate})"><i class="icon-forward"></i></button>
+ 
+  <!--     <button onclick="play()">截图</button>
+      <button onclick="save()">保存</button>
+
+ 	  <button onclick="document.getElementById('video').playbackRate++">playbackRate++</button>
+      <button onclick="document.getElementById('video').playbackRate--">playbackRate--</button>
+      <button onclick="document.getElementById('video').playbackRate+=0.1">playbackRate+=0.1</button>
+      <button onclick="document.getElementById('video').playbackRate-=0.1">playbackRate-=0.1</button><br>
+      <button onclick="document.getElementById('video').volume+=0.1">volume+=0.1</button>
+      <button onclick="document.getElementById('video').volume-=0.1">volume-=0.1</button>
+      <button onclick="document.getElementById('video').muted=true">muted=true</button>
+      <button onclick="document.getElementById('video').muted=false">muted=false</button><br>
+   -->   
+    </div>
+    <div id="bottom">
+    </div>
+    <div id="bottom2">
+    </div>
+<!-- 
+ <a href="javascript:document.movie2.Play();">播放</a><br>
+ <a href="javascript:document.movie2.Stop();">暂停</a><br>
+ <a href="javascript:document.movie2.Step(1);">向前一帧</a><br>
+ <a href="javascript:document.movie2.Step(-1);">向后一帧</a><br>
+ <a href="javascript:document.movie2.ShowDefaultView();">片段信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetQuickTimeVersion();alert(ss);">版本信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetQuickTimeLanguage();alert(ss);">语言信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetQuickTimeConnectionSpeed();alert(ss);">速度信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetIsQuickTimeRegistered();alert(ss);">注册信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetIsQuickTimeRegistered();alert(ss);">注册信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetPluginVersion();alert(ss);">插件版本信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.GetPluginStatus();alert(ss);">播放信息信息（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetAutoPlay(true);">自动播放（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetControllerVisible(true);">控制器显示（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetControllerVisible(false);">控制器隐藏（测试失败）</a><br>
+ <a href="javascript:var ss=document.movie2.SetTime(1);">帧数控制 （第一帧）</a><br>
+ <a href="javascript:var ss=document.movie2.GetTime();alert(ss);">当前帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetEndTime();alert(ss);">最终帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetRate();alert(ss);">播放速率（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetDuration();alert(ss);">片段长度（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetMaxTimeLoaded();alert(ss);">影片已下载量（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetTimeScale();alert(ss);">影片fps速率（测试成功）</a><br>
+ -->
+ <!-- 
+ <a href="javascript:var ss=document.movie2.GetMovieName();alert(ss);">当前帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.SetMovieName('11111');alert(ss);">当前帧数（测试成功）</a><br>
+
+ <a href="javascript:var ss=document.movie2.GetMovieID();alert(ss);">当前帧数（测试成功）</a><br>
+ <a href="javascript:var ss=document.movie2.GetMovieID();alert(ss);">当前帧数（测试成功）</a><br>
+  -->
+ 
+</div>
+
+					<div class="span4">
+						<div class="box" style=" border: 1px solid#ddd;padding: 10px;margin: 20px 0;">
+							<div class="box-title" style="margin-top: 0px;">
+								<h3>
+									<i class="icon-comments"></i>
+									&{'comments.title'}
+								</h3>
+								<div class="actions">
+									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
+									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
+								</div>
+							</div>
+							<div class="box-content nopadding">
+								<ul class="messages">
+									<li class=right style="display:none;">
+										<div class="image">
+											${session.username}
+										</div>
+										<div class="message">
+											<span class="caret"></span>
+											<p></p>
+									
+										</div>
+									</li>
+									#{list object.comments,as:'row'}
+									<li #{if row.user.truename==session.username}class=right#{/if}#{else}class="left"#{/else}>
+										<div class="image">
+											${row.user?.truename}
+										</div>
+										<div class="message">
+											<span class="caret"></span>
+											<p>#{if row.frameNumber!=null}<i class="icon-facetime-video"></i><a href="javascript:;" onclick="jumpTo(${row.frameNumber})"> ${row.frameNumber} </a>&{'comment.frameNumber'}--#{/if}${row.note}</p>
+										<!-- 	<span class="time">
+												${row.created?.format('MM-dd HH:mm')}
+											</span> -->
+										</div>
+									</li>
+									#{/list}
+									<li class="typing">
+										<span class="name">${session.username}</span> Typing<img src="/public/img/loading.gif" alt="">
+									</li>
+									<li class="insert">
+										<form id="comment-form" method="POST" action="#">
+											<div class="text">
+												<input type="hidden" name="comment.user.id" value="${session.userid}">
+												<input type="hidden" name="comment.version.id"  value="${object.id}" title="">
+												<button onclick="frameTo()" id="framebutton" rel="popover" type="button" class="btn btn-primary" data-placement="top" style="position: absolute;left: 0;" data-original-title="&{'frame.add'}"><i class="icon-facetime-video"></i></button>
+												<input type="hidden" id="comment_frameNumber" name="comment.frameNumber"  value="" style="width: 70%;">
+												<input type="text" name="comment.note" placeholder="Write here..." class="input-block-level" style="padding-left: 40px;">
+											</div>
+											<div class="submit" >
+												<button type="submit"><i class="icon-share-alt"></i></button>
+											</div>
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+<script>
+$("#paris_embed").attr("height",$("#paris_embed").width()*0.7);
+$(window).resize(function() {
+ $("#paris_embed").attr("height",$("#paris_embed").width()*0.7);
+});
+	 $("#comment-form").submit(function (e) {
+		e.preventDefault();
+		var $el = $(this);
+		var frame = $el.find("input[name='comment.frameNumber']").val();
+		var mess = $el.find("input[name='comment.note']").val(),
+		messageUl = $el.parents(".messages");
+		if ($el.find("button").attr("disabled") == undefined) {
+			$.ajax({
+				url:'/Comments/addUp',
+				type:'post',
+				data:$("#comment-form").serializeArray(),
+				success:function(){
+					var newEl = messageUl.find('.right').first().clone(),
+					answer = messageUl.find('.left').first().clone();
+					if(frame!=""){
+						mess="<a href='javascript:;' onclick='jumpTo("+frame+")'> "+frame+" </a>"+"&{'comment.frameNumber'}--"+mess
+					}
+					newEl.find(".message p").html(mess);
+					newEl.find(".message .time").html("now");
+					messageUl.find(".typing").before(newEl);
+					newEl.show();
+			//		slimScrollUpdate(messageUl.parents(".scrollable"), 100000);
+					$el.find("button").attr('disabled', 'disabled');
+			//		messageUl.find(".typing").removeClass("active");
+					$el.find("button").removeAttr("disabled");
+				}
+			});
+		}
+	});
+	
+	function play() {
+
+    var video = document.getElementById("video");
+    var bottom = document.getElementById("bottom");	
+		
+
+    var canvas = document.createElement('canvas');
+    
+    canvas.width  = 500;
+    canvas.height = 282;
+    $(canvas).sketch({defaultColor: "#ff0",defaultTool: 'marker'});
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, 500, 282); 
+	var image=ctx.canvas.toDataURL('image/png');
+    bottom.innerHTML = '';
+    var canvas1 = document.createElement('canvas');
+    $(canvas1).attr("style",'background: url('+image+');');
+    canvas1.id="canvas1";
+    canvas1.width  = 500;
+    canvas1.height = 282;
+    bottom.appendChild(canvas);
+	
+}
+
+	function save(){
+		 var bottom2 = document.getElementById("bottom2");
+		 var canvas1 = document.getElementById("canvas1");
+		 var canvas3 = document.createElement('canvas');
+		 canvas3.width  = 500;
+    	 canvas3.height = 282;
+    	 var ctx = canvas3.getContext('2d');
+   		 ctx.drawImage(canvas1, 0, 0, 500, 282); 
+    	 bottom2.appendChild(canvas3);	
+	}
+	
+	//跳到指定帧
+	function jumpTo(frame){
+		document.getElementById('video').currentTime=frame/${object.frameRate};
+		document.getElementById('video').pause();
+	}
+	
+		//获取当前帧
+	function frameTo(){
+		if($("#comment_frameNumber").val()==""){
+		var frame=document.getElementById('video').currentTime;
+		$("#comment_frameNumber").val((frame*${object.frameRate}).toFixed(0));
+		$("#framebutton").attr("data-content",frame.toFixed(0))
+		}else{
+			$("#comment_frameNumber").val("");
+		}
+	}
+	//载入
+	$(function(){
+		document.getElementById('video').load();
+	})
+</script>

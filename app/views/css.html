@@ -1,0 +1,151 @@
+%{
+	
+}%
+<!doctype html><html><head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!-- Apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- Apple devices fullscreen -->
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<title>Phenom</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+	<!-- Bootstrap responsive -->
+	<link rel="stylesheet" href="/public/css/bootstrap-responsive.min.css">
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="/public/css/plugins/jquery-ui/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="/public/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+	<!-- dataTables -->
+	<link rel="stylesheet" href="/public/css/plugins/datatable/TableTools.css">
+	<!-- chosen -->
+	<link rel="stylesheet" href="/public/css/plugins/chosen/chosen.css">
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="/public/css/style.css">
+	<!-- Notify -->
+	<link rel="stylesheet" href="/public/css/plugins/gritter/jquery.gritter.css">
+	<!-- Color CSS -->
+	<link rel="stylesheet" href="/public/css/themes.css">
+	<link rel="stylesheet" href="/public/css/stylefj.css" type="text/css"></link>
+	<!-- multi select -->
+	<link rel="stylesheet" href="/public/css/plugins/multiselect/multi-select.css">
+
+	<!-- jQuery -->
+	<script src="/public/js/jquery.min.js"></script>
+	
+	<!-- Nice Scroll -->
+	<script src="/public/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+	<!-- imagesLoaded -->
+	<script src="/public/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="/public/js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
+	<script src="/public/js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
+	<script src="/public/js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
+	<script src="/public/js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
+	<script src="/public/js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
+	<!-- slimScroll -->
+	<script src="/public/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="/public/js/bootstrap.min.js"></script>
+	<!-- Bootbox -->
+	<script src="/public/js/plugins/bootbox/jquery.bootbox.js"></script>
+	<!-- Notify -->
+	<script src="/public/js/plugins/gritter/jquery.gritter.min.js"></script>
+	<!-- dataTables -->
+	<script src="/public/js/plugins/datatable/jquery.dataTables.min.js"></script>
+	<!-- MultiSelect -->
+	<script src="/public/js/plugins/multiselect/jquery.multi-select.js"></script>
+	<script src="/public/js/plugins/datatable/TableTools.min.js"></script>
+	<script src="/public/js/plugins/datatable/ColReorder.min.js"></script>
+	<script src="/public/js/plugins/datatable/ColVis.min.js"></script>
+	<script src="/public/js/plugins/datatable/FixedColumns.min.js"></script>
+	<script src="/public/js/plugins/datatable/dataTables.scroller.min.js"></script>
+	<!-- Chosen -->
+	<script src="/public/js/plugins/chosen/chosen.jquery.min.js"></script>
+
+	
+
+	<!-- Theme framework -->
+	<script src="/public/js/eakroko.min.js"></script>
+	<!-- Theme scripts -->
+	<script src="/public/js/application.min.js"></script>
+	<!-- Just for demonstration -->
+	<script src="/public/js/demonstration.min.js"></script>
+	<script type="text/javascript" src="/public/javascripts/HashMap.js"></script>
+	<!--[if lte IE 9]>
+		<script src="/public/js/plugins/placeholder/jquery.placeholder.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('input, textarea').placeholder();
+			});
+		</script>
+	<![endif]-->
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<!-- Apple devices Homescreen icon -->
+	<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png">
+
+</script>
+<script type="text/javascript">
+$(function(){
+#{if flash.success}
+		$.gritter.add({
+			title: 	(typeof title !== 'undefined') ? title : "&{'alert.success'}",
+			text: 	(typeof message !== 'undefined') ? message : "&{flash.success}",
+			image: 	(typeof image !== 'undefined') ? image : null,
+			sticky: (typeof sticky !== 'undefined') ? sticky : false,
+			time: 	(typeof time !== 'undefined') ? time : 3000
+		});
+#{/if}
+$("button.back").click(function(){
+	history.back();
+});
+
+//删除
+$(".option_delete").click(function(){
+	var message="&{'delete.thisInfo'}";
+	if($(this).attr("message")!=null)message=$(this).attr("message");
+	if(confirm(message)){
+		location.href=$(this).attr("url");
+	}
+});
+});
+
+</script>
+</head>
+
+<body class="theme-lightgrey">
+	#{menu1 /}
+	<div id="main" style="margin-left: 0px;">
+				<div class="container-fluid" id="content">
+					<div class="container-fluid">
+					<div class="page-header">
+					</div>
+					<div class="breadcrumbs">
+						<ul>
+							<li>
+								<a href="#">#{if header!=null}&{header?.parentmenu?.name}#{/if}</a>
+								<i class="icon-angle-right"></i>
+							</li>
+							<li>
+								<a href="#">#{if header!=null}&{header?.menu?.name}#{/if}</a>
+								<i class="icon-angle-right"></i>
+							</li>
+							<li>
+								<a href="#">#{if header!=null}&{header?.name}#{/if}</a>
+							</li>
+						</ul>
+						<div class="close-bread">
+							<a href="#"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					#{doLayout /}
+					</div>	
+				</div>	
+				</div>
+#{footer /}
+	</body></html>

@@ -1,0 +1,63 @@
+#{extends "css.html"/}
+<div class="row-fluid">
+					<div class="span12">
+						<div class="box">
+							<div class="box-title">
+								<h3>
+									<i class="icon-table"></i>
+									&{'menu.title'}
+								</h3>
+							</div>
+							<div class="box-content nopadding">
+								<table class="table table-hover table-nomargin table-bordered ">
+									<thead>
+										<tr>
+											<th>&{'menu.name'}</th>
+											<th>&{'menu.sort'}</th>
+											<th>&{'menu.url'}</th>
+											<th class="hidden-350">&{'option'}</th>
+										</tr>
+									</thead>
+									<tbody>
+									#{list object2,as:'row'}
+										<tr>
+											<td>${row.name}</td>
+											<td>
+												${row.sort}
+											</td>
+											<td>
+												${row.url}
+											</td>
+											<td class="hidden-350">
+											<a href="/Menus/show?id=${row.id}">&{'option.edit'}</a>
+											</td>
+										</tr>
+										#{list row.menus,as:'row1'}
+										<tr>
+											<td>├${row1.name}</td>
+											<td>
+												${row1.sort}
+											</td>
+											<td>
+												${row1.url}
+											</td>
+											<td class="hidden-350">
+											<a href="/Menus/show?id=${row1.id}">&{'option.edit'}</a>
+											</td>
+										</tr>
+										#{/list}
+									#{/list}
+									</tbody>
+								</table>
+								<div class="dataTables_info">
+								<button type="button" class="btn btn-primary btn-small add" url="@@{blank()}">&{'option.add'}</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<script>
+$(".btn.btn-primary.btn-small.add").click(function(){
+	location.href=$(this).attr("url");
+});
+</script>

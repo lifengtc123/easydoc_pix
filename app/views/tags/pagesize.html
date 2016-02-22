@@ -1,0 +1,39 @@
+%{
+int __firstPage = 1;
+int __currentPage = _arg.pageNumber;
+int __maxPage = _arg.pageCount;
+int __rowCount = _arg.rowCount;
+int __pageSize = _arg.pageSize;
+
+boolean __hasPrev = _arg.hasPreviousPage;
+boolean __hasNext = _arg.hasNextPage;
+String __firstURL = __hasPrev ? _arg.getCallbackURL(1) : "javascript:void(0);";
+String __prevURL = __hasPrev ? _arg.getCallbackURL(__currentPage-1) : "javascript:void(0);";
+String __nextURL = __hasNext ? _arg.getCallbackURL(__currentPage+1) : "javascript:void(0);";
+String __lastURL = __hasNext ? _arg.getCallbackURL(__maxPage) : "javascript:void(0);";
+}%
+<div class="dataTables_info" id="DataTables_Table_1_info">
+#{if _addbutton!='hidden'}
+<button type="button" class="btn btn-primary btn-small add" url="@@{blank()}">&{'option.add'}</button>
+#{/if}
+	&{'page.showing'}
+	<span>${(__currentPage-1)*__pageSize+1}</span> &{'page.to'}
+	<span>${(__currentPage)*__pageSize}</span> &{'page.of'}
+	<span>${__rowCount}</span>&{'page.entries'}
+</div>
+#{if __maxPage>1}
+<div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+	<a tabindex="0" href="${__firstURL}" class="first paginate_button paginate_button_disabled" id="DataTables_Table_1_first">&{'page.first'}</a>
+	<a tabindex="0" href="${__prevURL}" class="previous paginate_button paginate_button_disabled" id="DataTables_Table_1_previous">&{'page.previous'}</a><span>
+	#{list items:__firstPage..__maxPage,as:'i'}
+	<a tabindex="0" href="${_arg.getCallbackURL(i)}" class="paginate_active">${i}</a>
+	#{/list}
+	</span><a href="${__nextURL}" tabindex="0" class="next paginate_button" id="DataTables_Table_1_next">&{'page.next'}</a>
+	<a  href="${__lastURL}" tabindex="0" class="last paginate_button" id="DataTables_Table_1_last">&{'page.last'}</a>
+</div>
+#{/if}
+<script>
+$(".btn.btn-primary.btn-small.add").click(function(){
+	location.href=$(this).attr("url");
+});
+</script>

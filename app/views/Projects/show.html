@@ -1,0 +1,26 @@
+#{extends "css.html"/}
+<div class="container-fluid" id="content">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box box-bordered">
+				<div class="box-title">
+					<h3>
+						<i class="icon-th-list"></i> &{'project.form'}
+					</h3>
+				</div>
+<div class="box-content nopadding">
+#{form @@save(object.id), class:"form-horizontal form-bordered" }
+#{form.textfield object:'object',name:'name',inputName:'project',value:object.name/}
+#{form.textfield object:'object',name:'state',inputName:'project',value:object.state/}
+#{form.textfield object:'object',name:'number',inputName:'project',value:object.number/}
+<input type="hidden" name="object.user.id" value="${session.userid}"/>
+<div class="form-actions">
+<button id="savebutton" type="sumbit" class="btn btn-primary">&{'option.save'}</button>
+<button type="button" class="btn back">&{'option.back'}</button>
+</div>
+#{/form}
+</div>
+</div>
+</div>
+</div>
+</div>

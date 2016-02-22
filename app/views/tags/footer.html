@@ -1,0 +1,15 @@
+		<div id="footer">
+			<p>
+				Copyright © 2013 Phenom Films Technology Co., Ltd. All Rights Reserved.  
+			</p>
+			<a href="#" class="gototop"><i class="icon-arrow-up"></i></a>
+		</div>
+		<script>
+			$(function(){
+				$("#laug").change(function(){
+					$.get('/Application/loug',{laug:$(this).val()},function(data){
+						location.reload();
+					})
+				});
+			})
+		</script>

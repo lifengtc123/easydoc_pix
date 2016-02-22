@@ -1,0 +1,18 @@
+#{field _object + '.' + _name}
+	#{if _label}
+	<label class="control-label">
+		&{_inputName + "." + _name}
+	</label>
+	#{/if}
+	<div class="controls">
+	#{if _input}
+	<input id="${field.id}" class="span6" type="text" name="${field.name}" value="${_value?.escape()?.raw()}"/>
+	#{/if}
+	#{else}
+	<input id="${field.id}" class="span6" type="text" name="${field.name}" value="${_value?.escape()?.raw()}"/>
+	#{/else}
+	#{ifError field.name}
+		<span class="error">${field.error}</span>
+	#{/ifError}
+	</div>
+#{/field}

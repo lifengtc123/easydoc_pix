@@ -1,0 +1,8 @@
+#{field _object + '.' + _name}
+									<div class="control-group">
+										<label for="${field.id}" class="control-label">&{_inputName + "." + _name}</label>
+										<div class="controls">
+											<input type="text" name="${field.name}" id="${field.id}" placeholder=""  value="${_value?.escape()?.raw()}" class="input-xlarge" #{if _readOnly}readOnly="readOnly"#{/if}>
+										</div>
+									</div>
+#{/field}

@@ -1,0 +1,14 @@
+.messages>li.insert #comment-form {
+background: #f9f9f9;
+margin-bottom: 0;
+}
+
+.messages>li.insert {
+position: relative;
+margin-right: 10px;
+border: 0px solid#ddd;
+}
+.messages>li.insert .text input[type="text"]{
+float: left;
+border: 1px solid#ddd;
+}

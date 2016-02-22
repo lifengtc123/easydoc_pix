@@ -1,0 +1,38 @@
+#{extends 'css.html' /}
+<div class="row-fluid">
+					<div class="span12">
+						<div class="box">
+							<div class="box-title">
+								<h3>
+									<i class="icon-table"></i>
+									&{'role.title'}
+								</h3>
+							</div>
+							<div class="box-content nopadding">
+								<table class="table table-hover table-nomargin table-bordered ">
+									<thead>
+										<tr>
+											<th>&{'role.name'}</th>
+											<th>&{'role.sort'}</th>
+											<th class="hidden-350">&{'option'}</th>
+										</tr>
+									</thead>
+									<tbody>
+									#{list pagedList.list,as:'row'}
+										<tr>
+											<td>${row.name}</td>
+											<td>
+												${row.sort}
+											</td>
+											<td class="hidden-350">
+											<a href="/Roles/show?id=${row.id}">&{'option.edit'}</a>
+											</td>
+										</tr>
+									#{/list}
+									</tbody>
+								</table>
+								#{pagesize pagedList/}
+							</div>
+						</div>
+					</div>
+				</div>

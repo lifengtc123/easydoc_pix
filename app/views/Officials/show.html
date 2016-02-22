@@ -1,0 +1,25 @@
+#{extends "main_list.html"/}
+#{set title:"&{'option.edit'}"/}
+#{form @@save(official?.id)}
+<div class="form">
+<div class="field" style="width: 49%;">
+#{field "official.project"}
+<label for="${field.id}">项目ID</label>
+<input type="text" id="${field.id}" name="${field.name}" value="${field.value}" class="txt01 ${field.errorClass}"/>
+<span class="error">${field.error}</span>
+#{/field}
+</div>
+<div class="field" style="width: 49%;">
+#{field "official.user"}
+<label for="${field.id}">负责人ID</label>
+<input type="text" id="${field.id}" name="${field.name}" value="${field.value}" class="txt01 ${field.errorClass}"/>
+<span class="error">${field.error}</span>
+#{/field}
+</div>
+<p class="buttons">
+<input type="hidden" name="official.id" value="${official?.id}"/>
+<input type="submit" name="_save" value="&{'option.save'}" class="btn01"/>
+<input type="button" name="_close" value="&{'option.close'}" class="btn01 option_close"/>
+</p>
+</div>
+#{/form}

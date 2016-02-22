@@ -1,0 +1,159 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+
+
+laug.chinese=中文
+laug.english=English
+
+#
+secour.login=Sign me in
+secour.username=Username
+secour.password=Password
+secour.remember=Remember me
+secour.lostpassword=Forgot password
+secour.logout=Sign out
+user.edit=Edit profile
+
+option=Option
+option.save=Save
+option.back=Back
+option.cancel=Cancel
+option.add=Add
+option.edit=Edit
+option.comeIn=ComeInto
+option.delete=Delete
+option.addStaff=Add officials
+
+
+role.name=Role name
+role.sort=Sort
+role.form=Role Info
+role.title=Role List
+
+user.truename=Truename
+user.mobile=Mobile
+user.role.id=Role
+user.username=Username
+user.password=Password
+user.sex=Sex
+user.email=Email
+user.tel=Tel
+user.cornet=Recommend
+user.status=Status
+
+menu.pid=Previous menu
+menu.sort=Sort
+menu.url=URL
+menu.title=Menu List
+menu.name=Menu name
+
+comment.title=Comment List
+comment.form=
+comment.user=评论人
+comment.comment=版本
+comment.frameNumber =Frame
+comment.note=评论
+
+official.title=Official List
+official.form=
+official.project=Project
+official.user=Leading official
+
+project=Project
+project.customlist=Project Info
+project.title=Project List
+project.form=Project Info
+project.user=Custom
+project.name=Project Name
+project.state=Statue
+project.number=Number
+scene.title=Scene List
+scene.form=Scene Info
+scene.project=Project
+scene.name=Name
+scene.number=scene
+scene.state=Statue
+scene.user=Custom
+
+version.title=列表
+version.form=版本信息
+version.scene=镜头
+version.number=版本编号
+version.user=客户
+version.state=版本状态
+scene.version=Versions
+
+comments.title=Comments
+
+alert.success=Success
+
+add.success=Added successfully.
+edit.success=Successful modification.
+
+project.official=Official
+project.staff=Staff
+
+roleControl.title=权限信息
+roleControl.name=控制器名
+roleControl.menu=菜单
+roleControl.controller=控制器
+roleControl.action=方法
+roleControl.value=值
+menu.form=菜单信息
+roleControl.form=权限信息
+
+project.custom=Project
+staff.project=Project Info
+version.delete=Delete this version
+
+application.result=Remind
+
+scene.list=Scene List
+
+project.list=Project List
+user.show=Edit User
+user.blank=Add User
+user.title=User Info
+scene.image=Movie
+frameRateUP=Go ahead
+
+frameRateDOWN=Draw back
+versionLOAD=Load
+versionPLAY=Play
+versionPAUSE=Pause
+add.frame=Insert frame
+versions.show=Version exchange
+delete.thisInfo=Delete this message?
+delete.success=Delete information successfully.
+add.scene=Add scene
+scene.edit=Add Shot
+staff.addPro=Add project
+
+frame.add=Insert frame
+
+page.showing=Showing
+page.to=to
+page.of=of
+page.entries=entries
+
+page.first=First
+page.previous=Previous
+page.next=Next
+page.last=Last
+projects.addofficials=Add officials
+project.user.id=custom
+edit.scene=Edit Scene
+
+pix.timeLabel=The film length
+pix.time=second
+pix.load=Click to download
+pix.loadLabel=Movie download
+pix.fpsLabel=The film FPS
+
+#menu
+
+user.list=User Info
+user.Info=User Info
+user.staff=Staff
+user.custom=Custom
+user.info=My Info

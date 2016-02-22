@@ -1,0 +1,59 @@
+%{
+		List menu=models.Menu.find("id in ("+session.get("usermenu")+")order by sort").fetch();
+		List menu2=new ArrayList();
+		for(models.Menu mm:menu){
+			if(mm.pid.equals("0")){
+				menu2.add(mm);
+			}
+		}
+		for(models.Menu mm:menu2){
+			for(models.Menu m:menu){
+				if(m.pid.equals(mm.cid)){
+					mm.menus.add(m);
+				}
+			}
+		}
+}%
+	<div id="navigation">
+		<div class="container-fluid">
+			<a href="/" id="brand">Phenom</a>
+		<!-- 	<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a> -->
+			<ul class='main-nav'>
+			#{list menu2,as:'row'}
+			<li>
+					<a href="${row.url}" data-toggle="dropdown" class='dropdown-toggle'>
+						<span>&{row.name}</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+					#{list row.menus,as:'row1'}
+						<li>
+							<a href="${row1.url}">&{row1.name}</a>
+						</li>
+					#{/list}
+					</ul>
+			</li>
+			#{/list}
+			</ul>
+			<div class="user">
+				
+				<div class="dropdown">
+					<a href="#" class='dropdown-toggle' data-toggle="dropdown">${session.username}</a>
+					<ul class="dropdown-menu pull-right">
+					
+						<li>
+							<a href="/Users/user_edit">&{'user.edit'}</a>
+						</li>
+						<!-- 
+						<li>
+							<a href="#">Account settings</a>
+						</li>
+						 -->
+						<li>
+							<a href="/Secure/logout">&{'secour.logout'}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>

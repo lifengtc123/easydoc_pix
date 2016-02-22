@@ -1,0 +1,26 @@
+#{extends "main_list.html"/}
+#{set title:"&{'option.edit'}菜单"/}
+%{
+	def map = [:]
+	map['show']	  = true
+	map['fields'] = ['form_s','pid','name','url','target','icon','sort','flag','form_e']
+	map['type']	  = ['text','text','text','text','text','text','text','select','text']
+	map['widths'] = ['100','100','50','100','50','50','50','50','100']
+	map['input']  = [:]
+	map['input']['flag'] = ['1':'使用','2':'停用']
+}%
+#{form @@save(object.id)}
+#{table.form map}
+#{table.custom 'pid'}
+<div class="field" style="width: 100%;">
+<label for="menu_pid">&{'menu.pid'}</label>
+#{select 'menu.pid',value:object?.pid}
+#{option 0}一级菜单#{/option}
+#{list list,as:'menu'}
+#{option menu.cid}${menu.name}#{/option}
+#{/list}
+#{/select}
+</div>
+#{/table.custom}
+#{/table.form}
+#{/form}

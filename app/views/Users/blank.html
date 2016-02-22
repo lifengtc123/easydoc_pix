@@ -1,0 +1,34 @@
+#{extends 'css.html'/}
+<div class="container-fluid" id="content">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box box-bordered">
+				<div class="box-title">
+					<h3>
+						<i class="icon-th-list"></i> &{'role.form'}
+					</h3>
+				</div>
+<div class="box-content nopadding">
+<form id="form1" name="form1" class="form-horizontal form-bordered" action="/users/create" method="POST" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" >
+#{table.selectField object:'object',name:'role.id',inputName:'user',value:object.role?.id,label:true,input:roles/}
+#{form.textfield object:'object',name:'username',inputName:'user',value:object.username/}
+#{form.textfield object:'object',name:'password',inputName:'user',value:object.password/}
+#{form.textfield object:'object',name:'truename',inputName:'user',value:object.truename/}
+#{table.selectField object:'object',name:'sex',inputName:'user',value:object.sex,label:true,input:['男':'男','女':'女']/}
+#{form.textfield object:'object',name:'email',inputName:'user',value:object.email/}
+#{form.textfield object:'object',name:'tel',inputName:'user',value:object.tel/}
+#{form.textfield object:'object',name:'mobile',inputName:'user',value:object.mobile/}
+#{form.textfield object:'object',name:'cornet',inputName:'user',value:object.cornet/}
+#{table.selectField object:'object',name:'status',inputName:'user',value:object.status,label:true,input:[1:'启用',2:'停用']/}
+<div class="form-actions">
+<button id="savebutton" type="sumbit" class="btn btn-primary">&{'option.save'}</button>
+<button type="button" class="btn back">&{'option.back'}</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script>
+
+</script>

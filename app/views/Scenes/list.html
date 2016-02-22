@@ -1,0 +1,59 @@
+#{extends "css.html"/}
+<div class="row-fluid">
+					<div class="span12">
+						<div class="box">
+							<div class="box-title">
+								<h3>
+									<i class="icon-table"></i>
+									&{'project.title'}
+								</h3>
+							</div>
+<div class="box-content nopadding">
+<form action="@@{delete()}" method="post" onsubmit="return chk_arrayid();" id="listform">
+<table class="table table-hover table-nomargin table-bordered ">
+<thead>
+<th><input type="checkbox" id="chkall"/></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','project').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'scene.image'}</a></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','project').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'scene.project'}</a></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','name').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'scene.name'}</a></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','state').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'scene.state'}</a></th>
+<th><a class="${order == 'DESC' ? 'sortedDesc' : 'sortedAsc'}" href="@{list().remove('page').add('order', (order == 'DESC' ? 'ASC' : 'DESC')).add('orderBy','user').add('search', params.search).add('condition',params.condition).add('field',params.field)}">
+&{'scene.version'}</a></th>
+<th>&{'option'}</th>
+</tr></thead>
+<tbody>
+#{list pagedList.list,as:'row'}
+<tr id="tr_${row.id}">
+<td><input type="checkbox" name="arrayid" value="${row.id}"/></td>
+<td><img src="${row?.versions[0]?.image}" height=108 width=192/></td>
+<td>${row.project}&nbsp;</td>
+<td>${row.name}&nbsp;</td>
+<td>${row.state}&nbsp;</td>
+<td>
+#{list row.versions,as:'row1'}
+<a href="/versions/show?id=${row1?.id}" #{if row1.comments.size()==0}style="color: blue;"#{/if}>[${row1}]</a>
+<a href="#" class="task-delete option_delete" rel="tooltip" title="" data-original-title="&{'version.delete'}" url="/Versions/delete?id=${row1.id}&projectid=${id}"><i class="icon-remove"></i></a>
+#{/list}
+</td>
+<td>
+<a href="javascript:void(0);" onclick="location.href='@@{show(row.id)}'">&{'scene.edit'}</a>
+<a href="javascript:void(0);" class="option_delete" url="@@{delete(row.id,null,id)}">&{'option.delete'}</a>
+</td>
+</tr>
+#{/list}
+</tbody>
+</table>
+</div>
+</td></tr></tbody></table>
+<div class="dataTables_info">
+<button type="button" class="btn btn-primary btn-small add" url="@@{blank(id)}">&{'option.add'}</button>
+</div>
+#{pagesize pagedList,addbutton:'hidden'/}
+</form>
+</div>
+</div>
+</div>

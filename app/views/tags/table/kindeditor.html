@@ -1,0 +1,12 @@
+%{
+ name = _arg;
+ id = _id;
+ value = _value;
+ width = _width ? _width: "100%";
+ height= _height ? _height:"250px";
+}%
+
+<script type="text/javascript">
+	defaultKindeditor("${id}");
+</script>
+<textarea name="${name}" id="${id}" style="width: ${width};height: ${height};">${value}</textarea>

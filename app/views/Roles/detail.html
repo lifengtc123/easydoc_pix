@@ -1,0 +1,111 @@
+<script type="text/javascript" src="/public/frame/role.js"></script>
+#{extends 'framemainl.html' /}
+			<div class="title">
+			<h5>
+				角色列表-查看
+			</h5>
+		</div>
+		#{form @@save(object.id),onsubmit:"return submit_form();"}
+		<fieldset class="mainForm">
+		<input type="hidden" id="value" name="value" value=""/>
+		#{field "object.name"}
+		<div class="rowElem">
+		<label>用户名:</label>
+		<div class="formRight"><input type="text" name="${field.name}" id="${field.id}" value="${field.value}"/></div>
+		</div>
+		#{/field}
+		#{field "object.sort"}
+		<div class="rowElem">
+		<label>排序:</label>
+		<div class="formRight"><input type="text" name="${field.name}" id="${field.id}" value="${field.value}"	/></div>
+		</div>
+		#{/field}
+		<div class="widget">  
+			<div class="head"><h5 class="iRecord">拥有菜单</h5>
+			<input type="checkbox" id="check1" name="chbox" class="menu" /><label for="check1" style="margin-top:4px">全选</label>
+			</div>
+			<div class="rowElem">
+			<table>
+			#{list menu_p,as:'p'}
+			<tr>
+			<td style="border: 1px solid #E7E7E7;width: 30%;vertical-align: middle;">
+			<div class="formRight">
+							<input type="checkbox" id="${p.cid}" cid="${p.cid}" name="menus" class="p_menu"  value="${p.id}"  ${((","+object.menu+",").indexOf(","+p.id+",")>-1)?" checked=checked":""} /><label for="${p.cid}">${p.name}</label>
+				
+			</div>
+			</td>
+			<td style="border: 1px solid #E7E7E7;">
+			#{list menu_c,as:'c'}
+			#{if c.pid == p.cid}
+			<div class="formRight" style="width: 100%;">
+							<input type="checkbox" id="${c.cid}" name="menus" cid="${c.cid}" pid="${c.pid}" value="${c.id}" class="c_menu" ${((","+object.menu+",").indexOf(","+c.id+",")>-1)?" checked=checked":""} /><label for="${c.cid}">${c.name}</label>
+							#{list role_c,as:'r'}
+							#{if c.id == r.menu.id}
+							<input class="r_menu" cid="${r.menu.cid}" pid="${r.menu.pid}" type="checkbox" #{if role.hasVal(rolevalue,r.controller,r.value)}checked="checked"#{/if}  name="cons" value="${r.value}" controller="${r.controller}"/><label >${r.name}</label>
+							#{/if}
+							#{/list}
+			</div>
+			#{/if}
+			#{/list}
+			</td>
+			</tr>
+			#{/list}
+			</table>
+			</div>
+		</div>
+		<div class="submitForm"><input type="submit" value="保存" class="greenBtn" />
+		<input type="button" value="返回" class="redBtn option_back" /></div>
+		
+		</fieldset>
+		#{/form}
+<script type="text/javascript">
+function submit_form(){
+	//先组合菜单
+	var map = new HashMap();
+	var value="";
+	$("input[name=cons]").each(function(){
+		if($(this).attr("checked")){
+			var controller = $(this).attr("controller");
+			var purview = map.get(controller);
+			if(purview==null) purview = 0;
+			purview = purview + Math.pow(2,$(this).val());
+			map.put(controller,purview);
+		}
+		
+	});
+	var keys = map.keys();
+	$.each(map.keys(),function(index,v){
+		if(value.length>0) value = value + "|";
+		value = value + v + ":" + map.get(v);
+	});
+	$("#value").val(value);
+	return true;
+}
+$(function(){
+$(".menu").click(function(){
+	checked = $(this).attr("checked");
+	if(checked==null)checked=false;
+	$(".p_menu").each(function(){
+		$(this).parent().attr("class",checked);
+		$(this).attr("checked",checked);
+	});
+	$(".c_menu").each(function(){
+		$(this).parent().attr("class",checked);
+		$(this).attr("checked",checked);
+		
+	});
+});
+
+$(".p_menu").click(function(){
+	cid = $(this).attr("cid");
+	checked = $(this).attr("checked");
+	if(checked==null)checked=false;
+	$(".c_menu").each(function(){
+		if($(this).attr("pid")==cid){
+			$(this).parent().attr("class",checked);
+			$(this).attr("checked",checked);
+		}
+	});
+});
+});
+</script>

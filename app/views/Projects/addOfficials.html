@@ -1,0 +1,45 @@
+#{extends "css.html"/}
+<div class="container-fluid" id="content">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box box-bordered">
+				<div class="box-title">
+					<h3>
+						<i class="icon-th-list"></i> &{'project.form'}
+					</h3>
+				</div>
+<div class="box-content nopadding">
+#{form @@addOff(),id:'form1', class:"form-horizontal form-bordered" }
+<div class="control-group">
+<label for="textfield" class="control-label">&{'project.official'}</label>
+<div class="controls">
+<select multiple="multiple" id="my-select" name="selectuser" class='multiselect' data-selectionheader="&{'project.official'}"
+								data-selectableheader="&{'project.staff'}">
+								#{list user,as:'row'}
+								<option value="${row.id}"	>${row.truename}</option>
+								#{/list}
+								#{list official,as:'row'}
+								<option value="${row.user.id}"	selected="selected">${row.user.truename}</option>
+								#{/list}
+							</select>
+						</div>
+					</div>
+					<input type="hidden" name="project.id" value="${id}"/>
+<div class="form-actions">
+<button id="savebutton" type="sumbit" class="btn btn-primary">&{'option.save'}</button>
+<button type="button" class="btn back">&{'option.back'}</button>
+</div>
+#{/form}
+</div>
+</div>
+</div>
+</div>
+<!-- 
+<script type="text/javascript">
+$("#form1").submit(function(e){
+	e.preventDefault();
+	var ss=$(this).serialize();
+	alert(ss);
+});
+</script>
+ -->
